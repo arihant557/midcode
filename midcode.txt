@@ -1,0 +1,91 @@
+package linklist;
+
+public class midLinkInsert
+{
+    public int size = 0;
+     Node head;
+     Node tail;
+
+     public void insertAtEnd(int data)
+     {
+         Node newnode = new Node(data);
+
+         if(head==null)          //if it null
+         {
+             // assign the valuess to it
+             head=newnode;
+             tail = newnode;
+
+         }
+         else
+         {
+             tail.next = newnode;
+             tail = newnode;
+         }
+         size++;
+     }
+
+     public void addMid(int data) // noe for mid
+     {
+         Node newnode = new Node(data);
+
+         if(head==null)
+         {
+             head = newnode;
+             tail = newnode;
+         }
+         else
+         {
+             Node temp;
+             Node current;
+             int count = (size % 2 == 0)?(size/2):((size+1)/2);  // if else lgane k lia ya check krne k lia koi base condir=tion ka hoina need h ....mid even h ya odd
+              temp=head;
+              current = null;
+              for(int i =0; i<count; i++)
+              {
+                  current = temp;
+                  temp = temp.next;
+              }
+              current.next = newnode;
+              newnode.next=temp;
+         }
+         size++;
+     }
+
+     public void display()
+{
+    Node current = head;
+    if(head == null)
+    {
+        System.out.println("list is empty");
+    }
+    while(current != null)
+    {
+        System.out.println(current.data+" ");
+        current = current.next;
+    }
+    System.out.println();
+}
+
+    public static void main(String[] args) {
+
+        midLinkInsert sList = new midLinkInsert();
+
+        //Adds data to the list
+        sList.insertAtEnd(1);
+        sList.insertAtEnd(2);
+
+        System.out.println("Original list: ");
+        sList.display();
+
+        //Inserting node '3' in the middle
+        sList.addMid(3);
+        System.out.println( "Updated List: ");
+        sList.display();
+
+        //Inserting node '4' in the middle
+        sList.addMid(4);
+        System.out.println("Updated List: ");
+        sList.display();
+    }
+}
